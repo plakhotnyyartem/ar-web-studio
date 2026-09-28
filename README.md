@@ -49,8 +49,10 @@ TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy go run .
 2. **New → Blueprint** → выберите репозиторий `ar-web-studio` → **Apply**.
 3. Render спросит `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`. Их можно оставить пустыми и добавить позже в **Environment**.
 
-Каждый `git push` в `main` обновляет сайт автоматически, если репозиторий подключён через GitHub-аккаунт.
-Если сервис создан по ссылке на публичный репозиторий, деплой запускается вручную: **Manual Deploy → Deploy latest commit**.
+Каждый `git push` в `main` обновляет сайт автоматически. Для этого на репозиторий должно быть
+установлено GitHub-приложение Render: <https://github.com/apps/render/installations/new> → **Only select repositories** →
+`ar-web-studio`. Без него GitHub не сообщает Render о новых коммитах, даже если в настройках сервиса стоит
+**Auto-Deploy: On Commit**. В этом случае деплой запускается вручную: **Manual Deploy → Deploy latest commit**.
 
 > На бесплатном тарифе диск временный: `data/leads.jsonl` очищается при каждом перезапуске.
 > Чтобы не терять заявки, подключите уведомления в Telegram.
