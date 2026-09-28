@@ -27,9 +27,12 @@ func main() {
 	// За балансировщиком хостинга (Render и т.п.) реальный IP посетителя приходит
 	// в X-Forwarded-For. Доверяем этому заголовку только от адресов прокси из
 	// TRUSTED_PROXIES, иначе все посетители выглядели бы как один IP.
+	// На Render прокси подключается к приложению с локального адреса (::1),
+	// поэтому вместе с заданными сетями доверяем и loopback: снаружи с него
+	// подключиться невозможно.
 	var proxies []string
 	if v := os.Getenv("TRUSTED_PROXIES"); v != "" {
-		proxies = strings.Split(v, ",")
+		proxies = append(strings.Split(v, ","), "127.0.0.1/32", "::1/128")
 	}
 	if err := r.SetTrustedProxies(proxies); err != nil {
 		log.Fatalf("TRUSTED_PROXIES: %v", err)
@@ -45,6 +48,7 @@ func main() {
 
 	h := &Handlers{leads: store, limiter: newRateLimiter(30 * time.Second)}
 	r.GET("/", h.Index)
+	r.HEAD("/", func(c *gin.Context) { c.Status(http.StatusOK) }) // проверка «жив ли сервис»
 	r.POST("/api/lead", h.CreateLead)
 	r.NoRoute(h.NotFound)
 
@@ -53,6 +57,8 @@ func main() {
 		Handler:           r,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
+
+	logTelegramStatus()
 
 	go func() {
 		log.Printf("AR Web Studio запущен: http://localhost:%s", port)

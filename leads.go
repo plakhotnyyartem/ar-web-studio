@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -58,6 +59,22 @@ func (s *LeadStore) Save(l Lead) error {
 
 var tgClient = &http.Client{Timeout: 10 * time.Second}
 
+// logTelegramStatus пишет при старте, включены ли уведомления, чтобы по логам
+// хостинга было сразу видно, подхватились ли переменные окружения.
+func logTelegramStatus() {
+	token, chatID := os.Getenv("TELEGRAM_BOT_TOKEN"), os.Getenv("TELEGRAM_CHAT_ID")
+	switch {
+	case token != "" && chatID != "":
+		log.Println("telegram: уведомления о заявках включены")
+	case token == "" && chatID == "":
+		log.Println("telegram: выключен (не заданы TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID)")
+	case token == "":
+		log.Println("telegram: выключен, не задан TELEGRAM_BOT_TOKEN")
+	default:
+		log.Println("telegram: выключен, не задан TELEGRAM_CHAT_ID")
+	}
+}
+
 // notifyTelegram отправляет заявку в Telegram, если заданы
 // TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID. Без них просто ничего не делает.
 func notifyTelegram(l Lead) {
@@ -82,11 +99,23 @@ func notifyTelegram(l Lead) {
 		url.Values{"chat_id": {chatID}, "text": {text}},
 	)
 	if err != nil {
-		log.Printf("telegram: %v", err)
+		// В тексте *url.Error есть адрес запроса, а в нём токен бота: логируем только причину.
+		var uerr *url.Error
+		if errors.As(err, &uerr) {
+			err = uerr.Err
+		}
+		log.Printf("telegram: не удалось отправить: %v", err)
 		return
 	}
-	resp.Body.Close()
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		log.Printf("telegram: статус %d", resp.StatusCode)
+		// Telegram объясняет причину в поле description: неверный токен, chat not found и т.п.
+		var body struct {
+			Description string `json:"description"`
+		}
+		json.NewDecoder(resp.Body).Decode(&body)
+		log.Printf("telegram: статус %d: %s", resp.StatusCode, body.Description)
+		return
 	}
+	log.Println("telegram: заявка отправлена")
 }
