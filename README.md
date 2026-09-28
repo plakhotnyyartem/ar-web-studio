@@ -49,7 +49,8 @@ TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy go run .
 2. **New → Blueprint** → выберите репозиторий `ar-web-studio` → **Apply**.
 3. Render спросит `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`. Их можно оставить пустыми и добавить позже в **Environment**.
 
-Каждый `git push` в `main` обновляет сайт автоматически.
+Каждый `git push` в `main` обновляет сайт автоматически, если репозиторий подключён через GitHub-аккаунт.
+Если сервис создан по ссылке на публичный репозиторий, деплой запускается вручную: **Manual Deploy → Deploy latest commit**.
 
 > На бесплатном тарифе диск временный: `data/leads.jsonl` очищается при каждом перезапуске.
 > Чтобы не терять заявки, подключите уведомления в Telegram.
@@ -63,4 +64,5 @@ GIN_MODE=release PORT=8080 go build -o ar-web-studio . && ./ar-web-studio
 
 Бинарнику нужны рядом папки `templates/` и `static/`.
 Если сервер стоит за прокси или балансировщиком, укажите его адреса в `TRUSTED_PROXIES` (через запятую, CIDR),
-иначе все посетители будут видны с одного IP.
+иначе все посетители будут видны с одного IP. Если перед сервером стоит CDN (например, Cloudflare),
+задайте `CLIENT_IP_HEADER=CF-Connecting-IP`: так сервер возьмёт точный IP посетителя из заголовка CDN.

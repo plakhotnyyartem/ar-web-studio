@@ -37,6 +37,13 @@ func main() {
 	if err := r.SetTrustedProxies(proxies); err != nil {
 		log.Fatalf("TRUSTED_PROXIES: %v", err)
 	}
+	// Если перед хостингом стоит CDN (Render работает за Cloudflare), в X-Forwarded-For
+	// последним оказывается адрес узла CDN. Точный IP посетителя CDN кладёт в свой
+	// заголовок, например CF-Connecting-IP. Задавайте только если весь трафик идёт через CDN:
+	// иначе посетитель сможет подставить этот заголовок сам.
+	if h := os.Getenv("CLIENT_IP_HEADER"); h != "" {
+		r.TrustedPlatform = h
+	}
 	r.SetFuncMap(template.FuncMap{
 		"icon": icon,
 		"year": func() int { return time.Now().Year() },
