@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.S.Name}}: сайты для малого бизнеса в {{.S.City}}</title>
+  <meta name="description" content="Создаю современные сайты для малого бизнеса в Алматы: лендинги, сайты компаний и каталоги. Заявки приходят сразу в WhatsApp и Telegram. Запуск от 5 дней.">
+  <meta property="og:title" content="{{.S.Name}}: сайты для малого бизнеса">
+  <meta property="og:description" content="Запускаем современный сайт, который помогает получать заявки.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0e0f13">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="{{.S.Name}}, на главную">
+      <span class="logo__mark">AR</span>
+      <span class="logo__text">Web Studio</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <a href="#services">Услуги</a>
+      <a href="#works">Работы</a>
+      <a href="#prices">Цены</a>
+      <a href="#process">Процесс</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Контакты</a>
+      <a href="#contact" class="btn btn--primary nav__cta">Получить расчёт</a>
+    </nav>
+    <a href="#contact" class="btn btn--primary btn--sm header__cta">Получить расчёт</a>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ===== Первый экран ===== -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="eyebrow reveal"><span class="dot"></span> Веб-студия · {{.S.City}}</p>
+        <h1 class="hero__title reveal">Сайты для <span class="accent-text">малого бизнеса</span></h1>
+        <p class="hero__lead reveal">Запускаем современный сайт, который помогает получать заявки.</p>
+        <div class="hero__actions reveal">
+          <a href="#contact" class="btn btn--primary btn--lg">Получить расчёт {{icon "arrow"}}</a>
+          <a href="#works" class="btn btn--ghost btn--lg">Смотреть работы</a>
+        </div>
+        <ul class="hero__facts reveal">
+          <li><strong>от 5 дней</strong><span>до запуска</span></li>
+          <li><strong>100%</strong><span>адаптив под телефон</span></li>
+          <li><strong>0 ₸</strong><span>консультация и смета</span></li>
+        </ul>
+      </div>
+
+      <div class="hero__visual reveal" aria-hidden="true">
+        <div class="mock">
+          <div class="mock__bar"><i></i><i></i><i></i><span>вашбизнес.kz</span></div>
+          <div class="mock__body">
+            <div class="mock__nav"><b></b><span></span><span></span><span></span><em></em></div>
+            <div class="mock__hero">
+              <div class="mock__lines"><b></b><b></b><span></span><span></span><em></em></div>
+              <div class="mock__img"></div>
+            </div>
+            <div class="mock__cards"><div></div><div></div><div></div></div>
+          </div>
+        </div>
+        <div class="float-card float-card--lead">
+          <div class="float-card__icon">{{icon "send"}}</div>
+          <div>
+            <b>Новая заявка</b>
+            <span>Стрижка + борода · сегодня 18:30</span>
+          </div>
+        </div>
+        <div class="float-card float-card--stat">
+          <span>Заявки с сайта</span>
+          <div class="bars"><i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:40%"></i><i style="--h:62%"></i><i style="--h:70%"></i><i style="--h:88%"></i></div>
+        </div>
+        <div class="float-card float-card--speed">
+          {{icon "zap"}} <b>0.8 c</b><span>загрузка</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Услуги ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Услуги</p>
+        <h2>Что я делаю для бизнеса</h2>
+        <p class="section__lead">Не просто «красивую картинку», а инструмент, который приводит клиентов и экономит ваше время.</p>
+      </div>
+      <div class="services">
+        {{range .Services}}
+        <article class="card service reveal">
+          <div class="service__icon">{{icon .Icon}}</div>
+          <h3>{{.Title}}</h3>
+          <p>{{.Text}}</p>
+        </article>
+        {{end}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Обо мне ===== -->
+  <section class="section section--dark" id="about">
+    <div class="container about">
+      <div class="about__photo reveal">
+        <div class="avatar" aria-hidden="true">AR</div>
+        <div class="about__badge">{{icon "map"}} {{.S.City}}</div>
+      </div>
+      <div class="about__content reveal">
+        <p class="eyebrow">О студии</p>
+        <h2>Привет, я {{.S.Owner}}</h2>
+        <p class="about__role">{{.S.Role}} {{.S.Name}}</p>
+        <p>Я делаю сайты для кофеен, салонов, мастеров и небольших компаний Алматы. Работаете вы со мной напрямую, без менеджеров и испорченного телефона: я и дизайнер, и разработчик, и тот, кто отвечает в WhatsApp.</p>
+        <p>Пишу сайты с нуля на современном стеке, без тяжёлых конструкторов. Поэтому они быстро открываются, хорошо выглядят на телефоне и не требуют ежемесячной подписки.</p>
+        <ul class="principles">
+          <li>{{icon "check"}} Фиксированная цена и сроки до начала работ</li>
+          <li>{{icon "check"}} Сайт и домен принадлежат вам</li>
+          <li>{{icon "check"}} Отвечаю в течение часа в рабочее время</li>
+        </ul>
+        <div class="stack">
+          {{range .Stack}}<span>{{.}}</span>{{end}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Примеры работ ===== -->
+  <section class="section" id="works">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Примеры работ</p>
+        <h2>Проекты, которые я сделал</h2>
+        <p class="section__lead">От интернет-магазина до системы управления рестораном. Код открыт на GitHub, можно посмотреть, как всё устроено внутри.</p>
+      </div>
+      <div class="works">
+        {{range $i, $p := .Projects}}
+        <article class="work reveal{{if eq $i 0}} work--wide{{end}}">
+          <div class="work__cover{{if .Image}} work__cover--shot{{end}}" style="--from: {{.From}}; --to: {{.To}}">
+            {{if .Image}}
+            <div class="work__window">
+              <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <img src="{{.Image}}" alt="Скриншот проекта «{{.Name}}»" width="1600" height="1000" loading="lazy" decoding="async">
+            </div>
+            {{else}}
+            <div class="work__emblem" aria-hidden="true">{{icon .Icon}}</div>
+            <ul class="work__stack" aria-label="Технологии">{{range .Stack}}<li>{{.}}</li>{{end}}</ul>
+            {{end}}
+          </div>
+          <div class="work__info">
+            <span class="badge">{{.Kind}}</span>
+            <h3>{{.Name}}</h3>
+            {{if .Image}}<ul class="chips work__chips" aria-label="Технологии">{{range .Stack}}<li>{{.}}</li>{{end}}</ul>{{end}}
+            <p class="work__summary">{{.Summary}}</p>
+            <ul class="work__highlights">
+              {{range .Highlights}}<li>{{icon "check"}} {{.}}</li>{{end}}
+            </ul>
+            <div class="work__links">
+              {{if .LiveURL}}<a class="btn btn--primary btn--sm" href="{{.LiveURL}}" target="_blank" rel="noopener">Открыть сайт {{icon "external"}}</a>{{end}}
+              {{if .Private}}
+              <span class="work__private">{{icon "lock"}} Код в закрытом репозитории</span>
+              {{else if .RepoURL}}
+              <a class="btn btn--ghost btn--sm" href="{{.RepoURL}}" target="_blank" rel="noopener">{{icon "github"}} Код на GitHub</a>
+              {{end}}
+            </div>
+          </div>
+        </article>
+        {{end}}
+        <a class="work work--cta reveal" href="#contact">
+          <div class="work--cta__icon">{{icon "plus"}}</div>
+          <h3>Здесь может быть ваш сайт</h3>
+          <p>Расскажите о своём бизнесе, и я предложу структуру и дизайн под вашу нишу.</p>
+          <span class="btn btn--primary">Обсудить проект</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Цены ===== -->
+  <section class="section section--tint" id="prices">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Цены</p>
+        <h2>Понятные тарифы без скрытых платежей</h2>
+        <p class="section__lead">Цену и сроки согласуем до начала работ. Оплата в два этапа: 50% на старте, 50% после запуска.</p>
+      </div>
+      <div class="plans">
+        {{range .Plans}}
+        <article class="plan reveal{{if .Featured}} plan--featured{{end}}">
+          {{if .Featured}}<span class="plan__tag">Популярный</span>{{end}}
+          <h3>{{.Name}}</h3>
+          <p class="plan__text">{{.Text}}</p>
+          <div class="plan__price">{{.Price}}</div>
+          <p class="plan__term">{{icon "clock"}} {{.Term}}</p>
+          <ul>
+            {{range .Features}}<li>{{icon "check"}} {{.}}</li>{{end}}
+          </ul>
+          <a href="#contact" class="btn {{if .Featured}}btn--light{{else}}btn--dark{{end}} btn--block" data-plan="{{.Name}}">Выбрать тариф</a>
+        </article>
+        {{end}}
+      </div>
+      <p class="plans__note reveal">Домен и хостинг оплачиваются отдельно (≈15–30 тыс. ₸ в год). Помогу всё зарегистрировать на ваше имя.</p>
+    </div>
+  </section>
+
+  <!-- ===== Процесс ===== -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Процесс работы</p>
+        <h2>От заявки до запуска за 5 шагов</h2>
+      </div>
+      <ol class="steps">
+        {{range $i, $s := .Steps}}
+        <li class="step reveal">
+          <span class="step__num">0{{inc $i}}</span>
+          <h3>{{.Title}}</h3>
+          <p>{{.Text}}</p>
+          <span class="step__term">{{.Term}}</span>
+        </li>
+        {{end}}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Отзывы ===== -->
+  <section class="section section--tint" id="reviews">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Отзывы</p>
+        <h2>Что говорят клиенты</h2>
+      </div>
+      {{if .Reviews}}
+      <div class="reviews">
+        {{range .Reviews}}
+        <figure class="review card reveal">
+          <div class="review__stars">{{icon "star"}}{{icon "star"}}{{icon "star"}}{{icon "star"}}{{icon "star"}}</div>
+          <blockquote>{{.Text}}</blockquote>
+          <figcaption><b>{{.Name}}</b><span>{{.Business}}</span></figcaption>
+        </figure>
+        {{end}}
+      </div>
+      {{else}}
+      <div class="first-client reveal">
+        <div class="first-client__icon">{{icon "gift"}}</div>
+        <div class="first-client__text">
+          <h3>Станьте одним из первых клиентов студии</h3>
+          <p>Студия только запускается, поэтому отзывов здесь пока нет, и выдумывать их я не буду. Первым пяти клиентам делаю <b>скидку 20%</b> в обмен на честный отзыв после запуска сайта.</p>
+        </div>
+        <a href="#contact" class="btn btn--primary">Занять место</a>
+      </div>
+      {{end}}
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq">
+    <div class="container faq-wrap">
+      <div class="section__head section__head--left reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Частые вопросы</h2>
+        <p class="section__lead">Не нашли ответ? Напишите в <a href="https://wa.me/{{.S.WhatsApp}}" target="_blank" rel="noopener">WhatsApp</a>, отвечу быстро.</p>
+      </div>
+      <div class="faq">
+        {{range .FAQ}}
+        <details class="faq__item reveal">
+          <summary>{{.Q}}<span class="faq__plus">{{icon "plus"}}</span></summary>
+          <div class="faq__answer"><p>{{.A}}</p></div>
+        </details>
+        {{end}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Контакты ===== -->
+  <section class="section section--dark" id="contact">
+    <div class="container contact">
+      <div class="contact__info reveal">
+        <p class="eyebrow">Контакты</p>
+        <h2>Получите расчёт стоимости сайта</h2>
+        <p class="section__lead">Оставьте заявку: перезвоню в течение часа в рабочее время, задам пару вопросов и назову точную цену. Ни к чему не обязывает.</p>
+        <ul class="contact__list">
+          <li><a href="tel:{{.S.PhoneHref}}">{{icon "phone"}} {{.S.Phone}}</a></li>
+          <li><a href="https://wa.me/{{.S.WhatsApp}}" target="_blank" rel="noopener">{{icon "whatsapp"}} WhatsApp</a></li>
+          <li><a href="https://t.me/{{.S.Telegram}}" target="_blank" rel="noopener">{{icon "send"}} @{{.S.Telegram}}</a></li>
+          <li><a href="mailto:{{.S.Email}}">{{icon "mail"}} {{.S.Email}}</a></li>
+          <li><span>{{icon "clock"}} {{.S.Hours}}</span></li>
+        </ul>
+      </div>
+
+      <form class="form reveal" id="lead-form" novalidate>
+        <div class="form__row">
+          <label class="field">
+            <span>Имя *</span>
+            <input type="text" name="name" autocomplete="name" maxlength="80" required placeholder="Как к вам обращаться">
+          </label>
+          <label class="field">
+            <span>Телефон / WhatsApp *</span>
+            <input type="tel" name="phone" autocomplete="tel" maxlength="30" required placeholder="+7 (___) ___-__-__">
+          </label>
+        </div>
+        <div class="form__row">
+          <label class="field">
+            <span>Ваш бизнес</span>
+            <input type="text" name="business" maxlength="100" placeholder="Например, кофейня">
+          </label>
+          <label class="field">
+            <span>Тариф</span>
+            <select name="package" id="package">
+              <option value="">Ещё не решил(а)</option>
+              {{range .Plans}}<option value="{{.Name}}">{{.Name}} · {{.Price}}</option>{{end}}
+            </select>
+          </label>
+        </div>
+        <label class="field">
+          <span>Задача</span>
+          <textarea name="message" rows="3" maxlength="1000" placeholder="Коротко: что продаёте и что хотите от сайта"></textarea>
+        </label>
+        <label class="hp" aria-hidden="true">Сайт <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <button type="submit" class="btn btn--primary btn--lg btn--block">Получить расчёт {{icon "arrow"}}</button>
+        <p class="form__status" role="status" aria-live="polite"></p>
+        <p class="form__note">Нажимая кнопку, вы соглашаетесь на обработку контактных данных для связи с вами.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="/" class="logo logo--light"><span class="logo__mark">AR</span><span class="logo__text">Web Studio</span></a>
+    <p>© {{year}} {{.S.Name}} · Сайты для малого бизнеса в {{.S.City}}</p>
+    <div class="footer__social">
+      <a href="https://wa.me/{{.S.WhatsApp}}" target="_blank" rel="noopener" aria-label="WhatsApp">{{icon "whatsapp"}}</a>
+      <a href="https://t.me/{{.S.Telegram}}" target="_blank" rel="noopener" aria-label="Telegram">{{icon "send"}}</a>
+      <a href="https://instagram.com/{{.S.Instagram}}" target="_blank" rel="noopener" aria-label="Instagram">{{icon "instagram"}}</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/{{.S.WhatsApp}}" class="fab" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">{{icon "whatsapp"}}</a>
+
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
