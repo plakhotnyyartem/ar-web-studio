@@ -1,0 +1,27 @@
+# systemd-служба сайта. Устанавливается в /etc/systemd/system/ar-web-studio.service
+[Unit]
+Description=AR Web Studio (Go + Gin)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=arweb
+Group=arweb
+WorkingDirectory=/opt/ar-web-studio
+# Настройки и секреты (токен Telegram) лежат вне репозитория
+EnvironmentFile=/etc/ar-web-studio.env
+ExecStart=/opt/ar-web-studio/app
+Restart=always
+RestartSec=3
+
+# Ограничения: сервису доступна на запись только папка с заявками
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/ar-web-studio/data
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target
