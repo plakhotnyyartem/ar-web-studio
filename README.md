@@ -41,10 +41,26 @@ TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy go run .
 
 Без них заявки просто сохраняются в `data/leads.jsonl`.
 
-## Продакшен
+## Деплой на Render
+
+Все настройки лежат в `render.yaml`.
+
+1. Войдите на [render.com](https://render.com) через GitHub.
+2. **New → Blueprint** → выберите репозиторий `ar-web-studio` → **Apply**.
+3. Render спросит `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`. Их можно оставить пустыми и добавить позже в **Environment**.
+
+Каждый `git push` в `main` обновляет сайт автоматически.
+
+> На бесплатном тарифе диск временный: `data/leads.jsonl` очищается при каждом перезапуске.
+> Чтобы не терять заявки, подключите уведомления в Telegram.
+> Также сайт «засыпает» после 15 минут без посетителей, и первое открытие занимает до минуты.
+
+## Продакшен вручную
 
 ```bash
 GIN_MODE=release PORT=8080 go build -o ar-web-studio . && ./ar-web-studio
 ```
 
 Бинарнику нужны рядом папки `templates/` и `static/`.
+Если сервер стоит за прокси или балансировщиком, укажите его адреса в `TRUSTED_PROXIES` (через запятую, CIDR),
+иначе все посетители будут видны с одного IP.

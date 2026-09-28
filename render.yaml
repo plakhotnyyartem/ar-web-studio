@@ -1,0 +1,22 @@
+# Настройки деплоя на Render (Blueprint): New → Blueprint → этот репозиторий.
+services:
+  - type: web
+    name: ar-web-studio
+    runtime: go
+    plan: free
+    region: frankfurt
+    buildCommand: go build -ldflags "-s -w" -o app .
+    startCommand: ./app
+    healthCheckPath: /
+    envVars:
+      - key: GIN_MODE
+        value: release
+      # Балансировщик Render подключается из внутренних (частных) сетей:
+      # только от них берём реальный IP посетителя из X-Forwarded-For.
+      - key: TRUSTED_PROXIES
+        value: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,100.64.0.0/10
+      # Заявки в Telegram (необязательно). Render спросит значения при создании.
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false

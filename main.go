@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -23,7 +24,16 @@ func main() {
 	}
 
 	r := gin.Default()
-	r.SetTrustedProxies(nil)
+	// За балансировщиком хостинга (Render и т.п.) реальный IP посетителя приходит
+	// в X-Forwarded-For. Доверяем этому заголовку только от адресов прокси из
+	// TRUSTED_PROXIES, иначе все посетители выглядели бы как один IP.
+	var proxies []string
+	if v := os.Getenv("TRUSTED_PROXIES"); v != "" {
+		proxies = strings.Split(v, ",")
+	}
+	if err := r.SetTrustedProxies(proxies); err != nil {
+		log.Fatalf("TRUSTED_PROXIES: %v", err)
+	}
 	r.SetFuncMap(template.FuncMap{
 		"icon": icon,
 		"year": func() int { return time.Now().Year() },
