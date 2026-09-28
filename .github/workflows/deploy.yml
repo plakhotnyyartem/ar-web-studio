@@ -1,0 +1,63 @@
+# Автодеплой на VPS: каждый push в main собирается и выкладывается на сервер.
+# Секреты репозитория (Settings → Secrets and variables → Actions):
+#   DEPLOY_HOST        — IP сервера
+#   DEPLOY_SSH_KEY     — приватный ключ пользователя deploy
+#   DEPLOY_KNOWN_HOSTS — отпечаток сервера (строка из ssh-keyscan)
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Не запускать два деплоя одновременно: новый ждёт, пока закончится предыдущий
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Проверка кода
+        run: go vet ./...
+
+      - name: Сборка под Linux
+        run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath -ldflags "-s -w" -o build/app .
+
+      - name: SSH-ключ
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Загрузка и установка
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          SSH="ssh -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+          rsync -az --delete -e "$SSH" build/app templates static "deploy@$HOST:/home/deploy/release/"
+          $SSH "deploy@$HOST" sudo /usr/local/bin/arweb-install
+
+      - name: Проверка сайта
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "http://$HOST/" -H 'Host: arwebstudio.shop')
+          echo "Ответ сайта: $code"
+          # 200 — сайт по HTTP, 301 — редирект на HTTPS после выпуска сертификата
+          [ "$code" = 200 ] || [ "$code" = 301 ]
+
+      - name: Удалить ключ
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Установка новой версии сайта из загруженного релиза.
+# Лежит на сервере в /usr/local/bin/arweb-install (владелец root).
+# Пользователю deploy разрешено запускать через sudo только эту команду и только
+# без аргументов (см. sudoers в deploy.sh), поэтому для него путь всегда по умолчанию.
+set -euo pipefail
+
+APP_DIR=/opt/ar-web-studio
+REL="${1:-/home/deploy/release}"
+
+for f in app templates static; do
+  [ -e "$REL/$f" ] || { echo "в релизе нет $f" >&2; exit 1; }
+done
+
+# Бинарник кладём атомарно: сначала рядом, потом переименовываем
+install -m 755 -o arweb -g arweb "$REL/app" "$APP_DIR/app.new"
+mv -f "$APP_DIR/app.new" "$APP_DIR/app"
+
+# Шаблоны и статику заменяем целиком, папку data/ с заявками не трогаем
+rm -rf "$APP_DIR/templates" "$APP_DIR/static"
+cp -r "$REL/templates" "$REL/static" "$APP_DIR/"
+chown -R arweb:arweb "$APP_DIR/templates" "$APP_DIR/static"
+
+systemctl restart ar-web-studio
+sleep 1
+if ! systemctl is-active --quiet ar-web-studio; then
+  journalctl -u ar-web-studio -n 20 --no-pager
+  exit 1
+fi
+echo "✓ ar-web-studio обновлён и запущен"
