@@ -45,9 +45,11 @@ func main() {
 		r.TrustedPlatform = h
 	}
 	r.SetFuncMap(template.FuncMap{
-		"icon": icon,
-		"year": func() int { return time.Now().Year() },
-		"inc":  func(i int) int { return i + 1 },
+		"icon":      icon,
+		"logo":      logo,
+		"logoGlyph": logoGlyph,
+		"year":      func() int { return time.Now().Year() },
+		"inc":       func(i int) int { return i + 1 },
 	})
 	r.LoadHTMLGlob("templates/*.html")
 	r.Static("/static", "./static")

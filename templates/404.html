@@ -6,12 +6,13 @@
   <title>Страница не найдена · {{.S.Name}}</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
   <main class="notfound">
     <div class="hero__glow" aria-hidden="true"></div>
+    <a href="/" class="logo notfound__logo" aria-label="{{.S.Name}}, на главную">{{logo "nf"}}<span class="logo__text"><b>AR Web Studio</b><small>сайты для бизнеса</small></span></a>
     <p class="notfound__code">404</p>
     <h1>Такой страницы нет</h1>
     <p>Возможно, ссылка устарела. Зато на главной есть примеры сайтов и цены.</p>
