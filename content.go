@@ -8,21 +8,24 @@ type StudioInfo struct {
 	Phone, PhoneHref, WhatsApp string
 	Telegram, Email, Instagram string
 	Hours                      string
+	// WhatsAppText подставляется в чат, когда посетитель нажимает кнопку WhatsApp
+	WhatsAppText string
 }
 
 // TODO: замените контакты на свои перед публикацией.
 var Studio = StudioInfo{
-	Name:      "AR Web Studio",
-	City:      "Алматы",
-	Owner:     "Артём",
-	Role:      "Основатель и разработчик",
-	Phone:     "+7 771 479 65 59",
-	PhoneHref: "+77714796559",
-	WhatsApp:  "77714796559",
-	Telegram:  "ARWebStudio",
-	Email:     "hello@arwebstudio.kz",
-	Instagram: "ar.webstudio",
-	Hours:     "Пн–Сб, 10:00–20:00",
+	Name:         "AR Web Studio",
+	City:         "Алматы",
+	Owner:        "Артём",
+	Role:         "Основатель и разработчик",
+	Phone:        "+7 771 479 65 59",
+	PhoneHref:    "+77714796559",
+	WhatsApp:     "77714796559",
+	Telegram:     "ARWebStudio",
+	Email:        "hello@arwebstudio.kz",
+	Instagram:    "ar.webstudio",
+	Hours:        "Пн–Сб, 10:00–20:00",
+	WhatsAppText: "Здравствуйте! Пишу с сайта AR Web Studio. Хочу узнать стоимость сайта для моего бизнеса.",
 }
 
 type Item struct {
