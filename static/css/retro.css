@@ -14,6 +14,8 @@
   --font: Tahoma, Verdana, "Segoe UI", sans-serif;
   --font-display: "Trebuchet MS", Tahoma, Verdana, sans-serif;
   --font-wordart: "Arial Black", Impact, "Arial", sans-serif;
+  /* Comic Sans есть на Mac и Windows; на телефонах его нет, там похожий Pangolin */
+  --font-comic: "Comic Sans MS", "Comic Sans", "Pangolin", "Chalkboard SE", cursive;
   --radius: 0px;
   --header-h: 64px;
 }
@@ -80,10 +82,10 @@ a:hover { color: #ff0000; }
 .section--dark p, .section--dark .section__lead { color: #333; }
 .section__head { margin-bottom: 32px; }
 .section__head h2, .about h2, .contact h2 {
-  font: bold clamp(26px, 3.4vw, 38px)/1.15 var(--font-display);
+  font: bold clamp(28px, 3.6vw, 40px)/1.2 var(--font-comic);
   letter-spacing: 0;
-  color: var(--xp-blue);
-  text-shadow: 1px 1px 0 #c6d3f7;
+  color: #cc0066;
+  text-shadow: 2px 2px 0 #ffccff;
 }
 .section__lead { color: #333; font-size: 16px; }
 .section__lead a { color: var(--xp-link); text-decoration: underline; }
