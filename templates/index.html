@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/retro.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -40,11 +41,19 @@
   </div>
 </header>
 
+<div class="ticker" role="marquee" aria-label="Сайты для малого бизнеса от 20 000 ₸, запуск от 5 дней, первым пяти клиентам скидка 20%">
+  <div class="ticker__track" aria-hidden="true">
+    <span>★ Сайты для малого бизнеса от 20 000 ₸ ★ Запуск от 5 дней ★ Первым 5 клиентам скидка 20% ★ Заявки сразу в WhatsApp и Telegram ★ Сделано в Алматы&nbsp;</span><span>★ Сайты для малого бизнеса от 20 000 ₸ ★ Запуск от 5 дней ★ Первым 5 клиентам скидка 20% ★ Заявки сразу в WhatsApp и Telegram ★ Сделано в Алматы&nbsp;</span>
+  </div>
+</div>
+
 <main>
   <!-- ===== Первый экран ===== -->
   <section class="hero">
     <div class="hero__glow" aria-hidden="true"></div>
-    <div class="container hero__inner">
+    <div class="container">
+      <div class="window">{{template "winbar" "💿 Добро_пожаловать.exe"}}
+      <div class="window__body hero__inner">
       <div class="hero__content">
         <p class="eyebrow reveal"><span class="dot"></span> Веб-студия · {{.S.City}}</p>
         <h1 class="hero__title reveal">Сайты для <span class="accent-text">малого бизнеса</span></h1>
@@ -87,12 +96,14 @@
           {{icon "zap"}} <b>0.8 c</b><span>загрузка</span>
         </div>
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Услуги ===== -->
   <section class="section" id="services">
     <div class="container">
+      <div class="window">{{template "winbar" "📁 C:\\Услуги"}}<div class="window__body">
       <div class="section__head reveal">
         <p class="eyebrow">Услуги</p>
         <h2>Что я делаю для бизнеса</h2>
@@ -107,12 +118,14 @@
         </article>
         {{end}}
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Обо мне ===== -->
   <section class="section section--dark" id="about">
-    <div class="container about">
+    <div class="container">
+      <div class="window">{{template "winbar" "👤 Обо_мне.txt"}}<div class="window__body about">
       <div class="about__photo reveal">
         <div class="avatar" aria-hidden="true">{{logoGlyph}}</div>
         <div class="about__badge">{{icon "map"}} {{.S.City}}</div>
@@ -132,12 +145,14 @@
           {{range .Stack}}<span>{{.}}</span>{{end}}
         </div>
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Примеры работ ===== -->
   <section class="section" id="works">
     <div class="container">
+      <div class="window">{{template "winbar" "🖼️ C:\\Портфолио\\"}}<div class="window__body">
       <div class="section__head reveal">
         <p class="eyebrow">Примеры работ</p>
         <h2>Проекты, которые я сделал</h2>
@@ -183,12 +198,14 @@
           <span class="btn btn--primary">Обсудить проект</span>
         </a>
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Цены ===== -->
   <section class="section section--tint" id="prices">
     <div class="container">
+      <div class="window">{{template "winbar" "💰 Прайс-лист.xls"}}<div class="window__body">
       <div class="section__head reveal">
         <p class="eyebrow">Цены</p>
         <h2>Понятные тарифы без скрытых платежей</h2>
@@ -210,12 +227,14 @@
         {{end}}
       </div>
       <p class="plans__note reveal">Домен и хостинг оплачиваются отдельно (≈15–30 тыс. ₸ в год). Помогу всё зарегистрировать на ваше имя.</p>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Процесс ===== -->
   <section class="section" id="process">
     <div class="container">
+      <div class="window">{{template "winbar" "⚙️ Мастер установки сайта"}}<div class="window__body">
       <div class="section__head reveal">
         <p class="eyebrow">Процесс работы</p>
         <h2>От заявки до запуска за 5 шагов</h2>
@@ -230,12 +249,14 @@
         </li>
         {{end}}
       </ol>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Отзывы ===== -->
   <section class="section section--tint" id="reviews">
     <div class="container">
+      <div class="window">{{template "winbar" "⭐ Отзывы.txt"}}<div class="window__body">
       <div class="section__head reveal">
         <p class="eyebrow">Отзывы</p>
         <h2>Что говорят клиенты</h2>
@@ -260,12 +281,14 @@
         <a href="#contact" class="btn btn--primary">Занять место</a>
       </div>
       {{end}}
+      </div></div>
     </div>
   </section>
 
   <!-- ===== FAQ ===== -->
   <section class="section" id="faq">
-    <div class="container faq-wrap">
+    <div class="container">
+      <div class="window">{{template "winbar" "❓ Справка и поддержка"}}<div class="window__body faq-wrap">
       <div class="section__head section__head--left reveal">
         <p class="eyebrow">FAQ</p>
         <h2>Частые вопросы</h2>
@@ -279,12 +302,14 @@
         </details>
         {{end}}
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ===== Контакты ===== -->
   <section class="section section--dark" id="contact">
-    <div class="container contact">
+    <div class="container">
+      <div class="window">{{template "winbar" "✉️ Новое сообщение — Outlook Express"}}<div class="window__body contact">
       <div class="contact__info reveal">
         <p class="eyebrow">Контакты</p>
         <h2>Получите расчёт стоимости сайта</h2>
@@ -331,6 +356,7 @@
         <p class="form__status" role="status" aria-live="polite"></p>
         <p class="form__note">Нажимая кнопку, вы соглашаетесь на обработку контактных данных для связи с вами.</p>
       </form>
+      </div></div>
     </div>
   </section>
 </main>
@@ -339,6 +365,12 @@
   <div class="container footer__inner">
     <a href="/" class="logo logo--light" aria-label="{{.S.Name}}, на главную">{{logo "footer"}}<span class="logo__text"><b>AR Web Studio</b><small>сайты для бизнеса</small></span></a>
     <p>© {{year}} {{.S.Name}} · Сайты для малого бизнеса в {{.S.City}}</p>
+    <div class="badges" aria-label="Технологии сайта">
+      <span class="badge88 b1">Powered by<b>Go + Gin</b></span>
+      <span class="badge88 b2">Hosted in<b>Almaty</b></span>
+      <span class="badge88 b3">Secured<b>HTTPS</b></span>
+      <span class="badge88 b4">Best viewed<b>на телефоне</b></span>
+    </div>
     <div class="footer__social">
       <a href="https://wa.me/{{.S.WhatsApp}}?text={{.S.WhatsAppText}}" target="_blank" rel="noopener" aria-label="WhatsApp">{{icon "whatsapp"}}</a>
       <a href="https://t.me/{{.S.Telegram}}" target="_blank" rel="noopener" aria-label="Telegram">{{icon "send"}}</a>
@@ -352,3 +384,4 @@
 <script src="/static/js/main.js" defer></script>
 </body>
 </html>
+{{define "winbar"}}<div class="window__bar"><span class="window__title">{{.}}</span><span class="window__btns" aria-hidden="true"><i>_</i><i>□</i><i class="close">×</i></span></div>{{end}}
