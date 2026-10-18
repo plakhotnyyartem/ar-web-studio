@@ -6,29 +6,17 @@
   <title>Страница не найдена · {{.S.Name}}</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
-  <link rel="stylesheet" href="/static/css/retro.css">
 </head>
 <body>
   <main class="notfound">
     <div class="hero__glow" aria-hidden="true"></div>
     <a href="/" class="logo notfound__logo" aria-label="{{.S.Name}}, на главную">{{logo "nf"}}<span class="logo__text"><b>AR Web Studio</b><small>сайты для бизнеса</small></span></a>
-    <div class="window">
-      {{template "winbar" "⚠️ Ошибка 404 — страница не найдена"}}
-      <div class="window__body">
-        <div class="notfound__icon" aria-hidden="true">❌</div>
-        <div>
-          <h1>Не удаётся найти страницу.</h1>
-          <p>Возможно, ссылка устарела или в адресе опечатка.</p>
-          <p>На главной есть примеры сайтов и цены.</p>
-        </div>
-        <div class="notfound__actions">
-          <a href="/" class="btn btn--primary">На главную</a>
-          <a href="javascript:history.back()" class="btn btn--ghost">Назад</a>
-        </div>
-      </div>
-    </div>
+    <p class="notfound__code">404</p>
+    <h1>Такой страницы нет</h1>
+    <p>Возможно, ссылка устарела. Зато на главной есть примеры сайтов и цены.</p>
+    <a href="/" class="btn btn--primary btn--lg">На главную {{icon "arrow"}}</a>
   </main>
 </body>
 </html>

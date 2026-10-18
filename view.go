@@ -69,8 +69,8 @@ const logoStrokes = `<path d="M9 35 17.5 13 26 35"/><path d="M26 35V13h5.5a6 6 0
 func logo(id string) template.HTML {
 	return template.HTML(`<svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">` +
 		`<defs><linearGradient id="lg-` + id + `" x1="0" y1="0" x2="1" y2="1">` +
-		`<stop offset="0" stop-color="#6a5cff"/><stop offset=".55" stop-color="#9b5cf6"/><stop offset="1" stop-color="#ff6b3d"/></linearGradient>` +
-		`<radialGradient id="lh-` + id + `" cx=".25" cy=".15" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>` +
+		`<stop offset="0" stop-color="#5f7d6b"/><stop offset="1" stop-color="#3e5649"/></linearGradient>` +
+		`<radialGradient id="lh-` + id + `" cx=".25" cy=".15" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>` +
 		`<rect width="48" height="48" rx="14" fill="url(#lg-` + id + `)"/><rect width="48" height="48" rx="14" fill="url(#lh-` + id + `)"/>` +
 		`<g fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">` + logoStrokes + `</g>` +
 		`<circle class="logo__dot" cx="17.5" cy="28" r="2.4" fill="#fff"/></svg>`)
